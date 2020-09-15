@@ -19,6 +19,8 @@ namespace MailSender.Models
 
         public bool IsSended { get; set; } = false;
 
+        public DateTime SendingDateTime { get; set; }
+
         public string ErrorMessage { get; set; } = "";
     }
 }

@@ -20,13 +20,6 @@ namespace MailSender.Controllers
         public MailsController(MailContext context)
         {
             db = context;
-
-            if (!db.Mails.Any())
-            {
-                db.Mails.Add(new Mail { Body = "testBody", Subject = "testSubject", Recipients = new string[] {"first", "second"} });
-                db.Mails.Add(new Mail { Body = "testBody2", Subject = "testSubject2", Recipients = new string[] { "third", "fourth" } });
-                db.SaveChanges();
-            }
         }
 
         [HttpGet]
@@ -50,10 +43,11 @@ namespace MailSender.Controllers
             }
             catch (Exception e)
             {
-                mail.ErrorMessage = e.Message;
-                mail.IsSended = false;
-                return BadRequest();                
-            }            
+                mail.ErrorMessage += "; " + e.Message;
+                mail.IsSended = false;              
+            }
+
+            mail.SendingDateTime = DateTime.Now;
             
             db.Mails.Add(mail);
             await db.SaveChangesAsync();

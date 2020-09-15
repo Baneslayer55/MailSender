@@ -13,7 +13,7 @@ namespace MailSender.Models
         {
             if (instance == null)
             {
-                instance = Js;
+                //instance = Js;
             }
             return instance;
         }
