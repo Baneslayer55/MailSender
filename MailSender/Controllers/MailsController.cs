@@ -43,7 +43,17 @@ namespace MailSender.Controllers
                 return BadRequest();
             }
 
-            MailService.Send(mail);
+            try
+            {
+                MailService.Send(mail);
+                mail.IsSended = true;
+            }
+            catch (Exception e)
+            {
+                mail.ErrorMessage = e.Message;
+                mail.IsSended = false;
+                return BadRequest();                
+            }            
             
             db.Mails.Add(mail);
             await db.SaveChangesAsync();

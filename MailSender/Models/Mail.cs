@@ -16,5 +16,9 @@ namespace MailSender.Models
         public string Body { get; set; }
                 
         public string[] Recipients { get; set; }
+
+        public bool IsSended { get; set; } = false;
+
+        public string ErrorMessage { get; set; } = "";
     }
 }
