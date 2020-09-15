@@ -14,9 +14,11 @@ namespace MailSender.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Mail>().Property(p => p.Recipients).HasConversion(
-                v => JsonConvert.SerializeObject(v),
-                v => JsonConvert.DeserializeObject<List<string>>(v));
+            modelBuilder.Entity<Mail>()
+                        .Property(p => p.Recipients)
+                        .HasConversion(
+                            v => string.Join(',', v),
+                            v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
         }
 
         public MailContext(DbContextOptions<MailContext> options) : base(options)

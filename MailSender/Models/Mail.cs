@@ -15,8 +15,6 @@ namespace MailSender.Models
 
         public string Body { get; set; }
                 
-        public ICollection<string> Recipients { get; set; }
-
-
+        public string[] Recipients { get; set; }
     }
 }

@@ -22,8 +22,8 @@ namespace MailSender.Controllers
 
             if (!db.Mails.Any())
             {
-                db.Mails.Add(new Mail { Body = "testBody", Subject = "testSubject", Recipients = {"first", "second"} });
-                db.Mails.Add(new Mail { Body = "testBody2", Subject = "testSubject2", Recipients = { "third", "fourth" } });
+                db.Mails.Add(new Mail { Body = "testBody", Subject = "testSubject", Recipients = new string[] {"first", "second"} });
+                db.Mails.Add(new Mail { Body = "testBody2", Subject = "testSubject2", Recipients = new string[] { "third", "fourth" } });
                 db.SaveChanges();
             }
         }
