@@ -6,6 +6,7 @@ using MailSender.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace MailSender.Controllers
 {
@@ -21,8 +22,8 @@ namespace MailSender.Controllers
 
             if (!db.Mails.Any())
             {
-                db.Mails.Add(new Mail { Body = "test", Recipients = "a", Subject = "test" });
-                db.Mails.Add(new Mail { Body = "test2", Recipients = "d", Subject = "test2" });
+                db.Mails.Add(new Mail { Body = "testBody", Subject = "testSubject", Recipients = {"first", "second"} });
+                db.Mails.Add(new Mail { Body = "testBody2", Subject = "testSubject2", Recipients = { "third", "fourth" } });
                 db.SaveChanges();
             }
         }
