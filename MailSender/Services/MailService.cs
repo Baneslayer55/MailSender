@@ -10,11 +10,29 @@ namespace MailSender.Services
 {
     public class MailService
     {
-        public void Send(Mail mail) 
+        public static void Send(Mail mail) 
         {
             MimeMessage message = new MimeMessage();
 
-            message.From.Add(new MailboxAddress("","")); // взять с jsona            
+            message.Sender = MailboxAddress.Parse("brisa.bosco@ethereal.email");
+
+            foreach(string email in mail.Recipients)
+            {
+                message.To.Add(MailboxAddress.Parse(email));
+            }
+            
+            message.Subject = "Test Email Subject";
+
+            message.Body = new TextPart(TextFormat.Plain) { Text = "Example Plain Text Message Body" };
+
+            
+            using var smtp = new SmtpClient();
+
+            smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
+
+            smtp.Authenticate("brisa.bosco@ethereal.email", "AArwGt1Dhr45q9GCUv");
+            smtp.Send(message);
+            smtp.Disconnect(true);
         }
     }
 }

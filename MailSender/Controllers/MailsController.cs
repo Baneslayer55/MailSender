@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MailSender.Models;
+using MailSender.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,8 @@ namespace MailSender.Controllers
                 return BadRequest();
             }
 
+            MailService.Send(mail);
+            
             db.Mails.Add(mail);
             await db.SaveChangesAsync();
             return Ok(mail);
