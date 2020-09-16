@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MailSender.Models
 {

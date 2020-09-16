@@ -1,12 +1,9 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
 using MailSender.Models;
-using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
 using System;
-using System.IO;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace MailSender.Services
@@ -24,12 +21,13 @@ namespace MailSender.Services
         /// The IsSended field of Mail entity is set to true if at least one message was sent.
         /// All emails that did not pass validation will be written to the ErrorMessage field of Mail entity.        
         /// </summary>
-        /// <param name="mail"> entity wich deserialized by controller.</param>
-        public static void Send(Mail mail) 
+        /// <param name="mail"> Entity wich deserialized by controller.</param>
+        /// <param name="configFileName"> Full name of configfile.json</param>
+        public static void Send(Mail mail, string configFileName) 
         {
             MimeMessage message = new MimeMessage();            
 
-            MailConfig mailConfig = MailConfig.GetConfig("mailconfig.json");
+            MailConfig mailConfig = MailConfig.GetConfig(configFileName);
 
             message.Sender = MailboxAddress.Parse(mailConfig.User);
             //Mimekit internal template does not handle well mails, so i have implemented an additional check
