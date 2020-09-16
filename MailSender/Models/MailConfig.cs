@@ -3,12 +3,21 @@ using System.Text.Json;
 
 namespace MailSender.Models
 {
+    /// <summary>
+    /// Is the entity to deserialize the email provider config
+    /// </summary>
     public class MailConfig
     {     
         public string Host { get; set; }
 
+        /// <summary>
+        /// Port
+        /// </summary>
         public string Port { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string User { get; set; }
 
         public string Password { get; set; }
