@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MailSender.Models.Mail">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAAAAAAAAAAIABgAAAAEAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\Mail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MailSender.Models.MailContext">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\MailContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MailSender.Models.MailConfig">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAIAAAAAAAACAAACAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MailConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MailSender.Controllers.MailsController" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAABAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\MailsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MailSender.Services.MailService">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\MailService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

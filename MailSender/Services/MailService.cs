@@ -4,6 +4,9 @@ using MailSender.Models;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
+using System;
+using System.IO;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace MailSender.Services
@@ -12,17 +15,23 @@ namespace MailSender.Services
     /// This class is responsible for sending emails.
     /// The MailKit library is used internally.
     /// </summary>
-    public class MailService
+    public static class MailService
     {
         /// <summary>
-        /// This static method sending emails.
-        /// The MailKit library is used internally.
+        /// Static method wich sending mails based on MailKit.   
+        /// Due to the insufficiently reliable email validation in MailKit, 
+        /// an additional validation step is implemented in this method.
+        /// The IsSended field of Mail entity is set to true if at least one message was sent.
+        /// All emails that did not pass validation will be written to the ErrorMessage field of Mail entity.        
         /// </summary>
+        /// <param name="mail"> entity wich deserialized by controller.</param>
         public static void Send(Mail mail) 
         {
-            MimeMessage message = new MimeMessage();
+            MimeMessage message = new MimeMessage();            
 
-            message.Sender = MailboxAddress.Parse("brisa.bosco@ethereal.email");
+            MailConfig mailConfig = MailConfig.GetConfig("mailconfig.json");
+
+            message.Sender = MailboxAddress.Parse(mailConfig.User);
             //Mimekit internal template does not handle well mails, so i have implemented an additional check
             string emailPattern = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
 
@@ -39,18 +48,17 @@ namespace MailSender.Services
                 
             }
             
-            message.Subject = "Test Email Subject";
+            message.Subject = mail.Subject;
 
-            message.Body = new TextPart(TextFormat.Plain) { Text = "Example Plain Text Message Body" };
-
+            message.Body = new TextPart(TextFormat.Plain) { Text = mail.Body };
             
             using var smtp = new SmtpClient();
 
-            smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
+            smtp.Connect(mailConfig.Host, Convert.ToInt32(mailConfig.Port), SecureSocketOptions.StartTls);
 
-            smtp.Authenticate("brisa.bosco@ethereal.email", "AArwGt1Dhr45q9GCUv");
+            smtp.Authenticate(mailConfig.User, mailConfig.Password);
             smtp.Send(message);
             smtp.Disconnect(true);
-        }
+        }       
     }
 }

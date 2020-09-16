@@ -2,5 +2,5 @@
   "host": "smtp.ethereal.email",
   "port": "587",
   "user": "brisa.bosco@ethereal.email",
-  "pass": "AArwGt1Dhr45q9GCUv"
+  "password": "AArwGt1Dhr45q9GCUv"
 }

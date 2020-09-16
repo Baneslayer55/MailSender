@@ -22,12 +22,26 @@ namespace MailSender.Controllers
             db = context;
         }
 
+        /// <summary>
+        /// Return all serialized mail entities. 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Mail>>> Get()
         {
             return await db.Mails.ToListAsync();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <example>Input entity template:</example>
+        /// <code>
+        /// 
+        /// 
+        /// </code>
+        /// <param name="mail"> </param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Mail>> Post(Mail mail)
         {
@@ -43,7 +57,7 @@ namespace MailSender.Controllers
             }
             catch (Exception e)
             {
-                mail.ErrorMessage += "; " + e.Message;
+                mail.ErrorMessage += " " + e.Message;
                 mail.IsSended = false;              
             }
 
