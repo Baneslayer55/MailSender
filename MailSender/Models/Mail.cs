@@ -16,7 +16,7 @@ namespace MailSender.Models
         /// <summary>
         /// Subject of email in string format
         /// </summary>
-        public string Subject { get; set; }
+        public string Subject { get; set; } = "(no subject)";
 
         /// <summary>
         /// Body of email in string format
